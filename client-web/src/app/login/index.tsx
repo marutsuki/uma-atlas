@@ -34,17 +34,17 @@ const LoginPage: FC = () => {
     };
 
     return (
-        <div className="flex h-screen w-screen items-center justify-center">
+        <div className="flex h-screen w-screen items-center justify-around">
+            <img
+                src="/uma-atlas-logo.png"
+                alt="Logo"
+                className="h-96 place-self-center"
+            />
+
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="flex flex-col gap-4 w-64 max-w-md p-8 bg-[rgba(255,255,255,0.2)] backdrop-blur-2xl rounded-lg shadow"
+                className="flex flex-col gap-4 w-64 max-w-md p-8 bg-[rgba(255,255,255,0.2)] backdrop-blur-2xl rounded-lg shadow-lg"
             >
-                <img
-                    src="/logo.png"
-                    alt="Logo"
-                    className="mb-4 h-32 w-32 place-self-center"
-                />
-
                 <div>
                     {errors.email && (
                         <small className="text-error-fg">

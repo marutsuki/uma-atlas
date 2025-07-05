@@ -1,9 +1,12 @@
 # Node modules
 server/node_modules/
+client-web/node_modules/
 
 # Build output
 server/dist/
 server/build/
+client-web/dist/
+client-web/build/
 
 # TypeScript cache
 *.tsbuildinfo

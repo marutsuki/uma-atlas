@@ -32,7 +32,7 @@ const authSlice = createSlice({
 });
 
 export const me = createAsyncThunk("/auth/me", async (_, { dispatch }) => {
-    const res = await api.get("/api/iam");
+    const res = await api.get("/api/iam/auth/me");
     if (res.data.user) {
         dispatch(setCurrentUser(res.data.user as User));
     }

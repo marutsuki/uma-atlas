@@ -41,7 +41,7 @@ const RegisterPage: FC = () => {
                 className="flex flex-col gap-4 w-64 max-w-md p-8 bg-[rgba(255,255,255,0.2)] backdrop-blur-2xl rounded-lg shadow"
             >
                 <img
-                    src="/logo.png"
+                    src="/uma-atlas-logo.png"
                     alt="Logo"
                     className="mb-4 h-32 w-32 place-self-center"
                 />
