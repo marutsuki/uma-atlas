@@ -31,13 +31,15 @@ enum Role {
 }
 
 model Legacy {
-  id        String   @id @default(cuid())
-  active    Boolean
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(cuid())
+  active      Boolean
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  umaMusumeId String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
+  umaMusume UmaMusume? @relation(fields: [umaMusumeId], references: [id])
   blueSpark BlueSpark?
   pinkSpark PinkSpark?
 }
@@ -75,4 +77,12 @@ enum PinkSparkType {
   PACE_CHASER
   LATE_SURGER
   END_CLOSER
+}
+
+model UmaMusume {
+  id              String   @id @default(cuid())
+  key             String
+  name            String
+  displayImageUrl String
+  Legacy          Legacy[]
 }
