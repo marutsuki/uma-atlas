@@ -19,10 +19,59 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  legacies Legacy[]
+
   @@map("users")
 }
 
 enum Role {
   USER
   ADMIN
+}
+
+model Legacy {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  blueSpark         BlueSpark?
+  pinkSpark         PinkSpark?
+  pinkSparkLegacyId String
+}
+
+model BlueSpark {
+  type     BlueSparkType
+  stars    Int
+  legacy   Legacy        @relation(fields: [legacyId], references: [id])
+  legacyId String        @id
+}
+
+enum BlueSparkType {
+  SPEED
+  STAMINA
+  POWER
+  GUTS
+  WIT
+}
+
+model PinkSpark {
+  type     PinkSparkType
+  stars    Int
+  legacy   Legacy        @relation(fields: [legacyId], references: [id])
+  legacyId String        @id
+}
+
+enum PinkSparkType {
+  TURF
+  DIRT
+  SPRINT
+  MILE
+  MIDDLE_DISTANCE
+  LONG_DISTANCE
+  FRONT_RUNNER
+  PACE_CHASER
+  LATE_SURGER
+  END_CLOSER
 }
