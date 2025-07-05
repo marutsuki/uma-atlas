@@ -9,6 +9,7 @@ import { errorHandler, notFound } from '../middleware/errorHandler';
 // Import routes
 import authRoutes from './iam/routes/authRoutes';
 import userRoutes from './iam/routes/userRoutes';
+import legacyRoutes from './legacy/routes/legacyRoutes';
 import { PORT } from '@/config/api';
 
 // Load environment variables
@@ -42,11 +43,13 @@ app.get('/health', (req, res) => {
 // API routes
 app.use('/api/iam/auth', authRoutes);
 app.use('/api/iam/users', userRoutes);
+app.use('/api/legacy', legacyRoutes);
 
 
-console.log(`📊 Health check: http://localhost:${PORT}/health`);
+console.log(`� Health check: http://localhost:${PORT}/health`);
 console.log(`🔐 Auth API: http://localhost:${PORT}/api/iam/auth`);
-console.log(`👥 Users API: http://localhost:${PORT}/api/iam/users`);
+console.log(`�👥 Users API: http://localhost:${PORT}/api/iam/users`);
+console.log(`🏆 Legacy API: http://localhost:${PORT}/api/legacy`);
 
 // 404 handler
 app.use(notFound);

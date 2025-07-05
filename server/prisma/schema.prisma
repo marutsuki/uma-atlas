@@ -19,7 +19,8 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  legacies Legacy[]
+  friendCode String?
+  legacies   Legacy[]
 
   @@map("users")
 }
@@ -31,14 +32,14 @@ enum Role {
 
 model Legacy {
   id        String   @id @default(cuid())
+  active    Boolean
   user      User     @relation(fields: [userId], references: [id])
   userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  blueSpark         BlueSpark?
-  pinkSpark         PinkSpark?
-  pinkSparkLegacyId String
+  blueSpark BlueSpark?
+  pinkSpark PinkSpark?
 }
 
 model BlueSpark {
