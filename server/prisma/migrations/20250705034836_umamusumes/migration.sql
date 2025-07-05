@@ -17,6 +17,7 @@ ALTER TABLE "Legacy" ADD CONSTRAINT "Legacy_umaMusumeId_fkey" FOREIGN KEY ("umaM
 INSERT INTO "UmaMusume" 
 ("id", "key", "name", "displayImageUrl") 
 VALUES
+-- TODO: These image urls need to be updated
 ('umamusume0', 'SPECIAL_WEEK', 'Special Week', 'https://umamusume-images.com/special_week.jpg'),
 ('umamusume1', 'SILENCE_SUZUKA', 'Silence Suzuka', 'https://umamusume-images.com/silence_suzuka.jpg'),
 ('umamusume2', 'TOUKAI_TEIO', 'Toukai Teio', 'https://umamusume-images.com/toukai_teio.jpg'),
