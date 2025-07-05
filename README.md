@@ -1,4 +1,4 @@
-<div align="center"><img height="400px" src="assets/uma-atlas-logo.png"/></div>
+<div align="center"><img height="200px" src="assets/uma-atlas-logo.png"/></div>
 
 
 # Uma Atlas
