@@ -1,0 +1,1 @@
+export const PORT: Readonly<number> = parseInt(process.env.PORT || '3001');
