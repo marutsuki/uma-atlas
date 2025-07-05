@@ -32,17 +32,16 @@ const authSlice = createSlice({
 });
 
 export const me = createAsyncThunk("/auth/me", async (_, { dispatch }) => {
-    const res = await api.get("/api/iam/auth/me");
-    if (res.data.user) {
-        dispatch(setCurrentUser(res.data.user as User));
+    const res = await api.get("/api/iam/auth/me") as AuthResponse;
+    if (res.user) {
+        dispatch(setCurrentUser(res.user));
     }
 });
 
 export const register = createAsyncThunk<void, RegisterRequest>(
     "/auth/register",
     async (payload, { dispatch, rejectWithValue, fulfillWithValue }) => {
-        const res = (await api.post("/api/iam/auth/register", payload))
-            .data as AuthResponse;
+        const res = (await api.post("/api/iam/auth/register", payload)) as AuthResponse;
 
         if (res.token) {
             localStorage.setItem("jwt", res.token);
@@ -56,9 +55,7 @@ export const register = createAsyncThunk<void, RegisterRequest>(
 export const login = createAsyncThunk<void, LoginRequest>(
     "/auth/login",
     async (payload, { dispatch, rejectWithValue, fulfillWithValue }) => {
-        const res = (await api.post("/api/iam/auth/login", payload))
-            .data as AuthResponse;
-
+        const res = (await api.post("/api/iam/auth/login", payload)) as AuthResponse;
         if (res.token) {
             localStorage.setItem("jwt", res.token);
             dispatch(setCurrentUser(res.user));

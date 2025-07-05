@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import alertReducer from "./slices/alert.slice";
 import authReducer from "./slices/auth.slice";
 
 const store = configureStore({
     reducer: {
+        alert: alertReducer,
         auth: authReducer,
     },
 });
@@ -13,4 +15,5 @@ export type AppDispatch = typeof store.dispatch;
 
 export const useAppDispatch = () => store.dispatch as AppDispatch;
 
+export const dispatch = store.dispatch;
 export default store;

@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useAppDispatch } from "../../store";
 import { login } from "../../store/slices/auth.slice";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const loginInputSchema = z.object({
     email: z.string().min(3, "Required"),
@@ -24,8 +24,10 @@ const LoginPage: FC = () => {
 
     const onSubmit = (data: z.infer<typeof loginInputSchema>) => {
         dispatch(login(data))
-            .then(() => {
-                navigate("/");
+            .then((res) => {
+                if (res.meta.requestStatus === 'fulfilled') {
+                    navigate("/");
+                }
             })
             .catch((error) => {
                 // TODO: better error handling
@@ -72,10 +74,13 @@ const LoginPage: FC = () => {
                 </div>
 
                 <input
-                    className="p-2 bg-primary text-primary-fg rounded cursor-pointer bg-primary-bg hover:bg-primary-dark"
+                    className="p-2 bg-primary-bg rounded cursor-pointer active:bg-primary-bg-dark duration-100"
                     type="submit"
                     value="Login"
                 />
+                <div>
+                    Don't have an account? <Link className="underline" to="/auth/register">Register</Link>
+                </div>
             </form>
         </div>
     );

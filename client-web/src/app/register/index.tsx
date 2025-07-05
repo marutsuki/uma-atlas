@@ -3,10 +3,10 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useAppDispatch } from "../../store";
-import { login } from "../../store/slices/auth.slice";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { register } from "@/store/slices/auth.slice";
 
-const loginInputSchema = z.object({
+const registerInputSchema = z.object({
     username: z.string().min(3, "Required"),
     email: z.string().min(3, "Required"),
     password: z.string().min(4, "Required"),
@@ -16,17 +16,19 @@ const RegisterPage: FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const {
-        register,
+        register: zRegister,
         handleSubmit,
         formState: { errors },
-    } = useForm<z.infer<typeof loginInputSchema>>({
-        resolver: zodResolver(loginInputSchema),
+    } = useForm<z.infer<typeof registerInputSchema>>({
+        resolver: zodResolver(registerInputSchema),
     });
 
-    const onSubmit = (data: z.infer<typeof loginInputSchema>) => {
-        dispatch(login(data))
-            .then(() => {
-                navigate("/");
+    const onSubmit = (data: z.infer<typeof registerInputSchema>) => {
+        dispatch(register(data))
+            .then((res) => {
+                if (res.meta.requestStatus === 'fulfilled') {
+                    navigate("/");
+                }
             })
             .catch((error) => {
                 // TODO: better error handling
@@ -35,17 +37,17 @@ const RegisterPage: FC = () => {
     };
 
     return (
-        <div className="flex h-screen w-screen items-center justify-center">
+        <div className="flex h-screen w-screen items-center justify-around">
+            <img
+                src="/uma-atlas-logo.png"
+                alt="Logo"
+                className="h-96 place-self-center"
+            />
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="flex flex-col gap-4 w-64 max-w-md p-8 bg-[rgba(255,255,255,0.2)] backdrop-blur-2xl rounded-lg shadow"
             >
-                <img
-                    src="/uma-atlas-logo.png"
-                    alt="Logo"
-                    className="mb-4 h-32 w-32 place-self-center"
-                />
-
+                <h1 className="text-center text-xl my-4">Account Creation</h1>
                 <div>
                     {errors.username && (
                         <small className="text-error-fg">
@@ -56,7 +58,7 @@ const RegisterPage: FC = () => {
                         className="p-2 border rounded text-primary-fg border-border"
                         type="text"
                         placeholder="Username"
-                        {...register("username")}
+                        {...zRegister("username")}
                     />
                 </div>
 
@@ -70,7 +72,7 @@ const RegisterPage: FC = () => {
                         className="p-2 border rounded text-primary-fg border-border"
                         type="text"
                         placeholder="Email"
-                        {...register("email")}
+                        {...zRegister("email")}
                     />
                 </div>
 
@@ -82,7 +84,7 @@ const RegisterPage: FC = () => {
                         className="p-2 border rounded text-primary-fg border-border"
                         type="password"
                         placeholder="Password"
-                        {...register("password")}
+                        {...zRegister("password")}
                     />
                 </div>
 
@@ -91,6 +93,9 @@ const RegisterPage: FC = () => {
                     type="submit"
                     value="Register"
                 />
+                <div>
+                    Have an account already? <Link className="underline" to="/auth/register">Login</Link>
+                </div>
             </form>
         </div>
     );

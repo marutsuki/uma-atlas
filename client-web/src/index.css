@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+@theme {
+    --color-primary-bg: rgba(173, 216, 255, 1);
+    --color-primary-bg-dark: rgba(100, 140, 255, 1);
+    --animate-alert-slidein: alert-slidein 300ms ease-in;
+}
+
+@keyframes alert-slidein {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 100%;
+    }
+}

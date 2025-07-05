@@ -24,7 +24,6 @@ export const AuthSuspense: FC<{ children: ReactNode }> = ({
 export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
     const user = useMaybeCurrentUser();
 
-    console.log(user);
     if (!user) {
         console.error("Unauthorized access, redirecting to login...");
         const searchParams = new URLSearchParams();
@@ -34,5 +33,7 @@ export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
         return <Navigate to={location} replace />;
     }
 
-    return children;
+    return <AuthSuspense>
+        {children}
+    </AuthSuspense>
 };

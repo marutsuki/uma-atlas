@@ -3,6 +3,7 @@ import { Loader } from "@/components/ui/Loader";
 import store from "../store";
 import { Provider } from "react-redux";
 import { AuthSuspense } from "../lib/auth.component";
+import { AlertProvider } from "@/components/ui/AlertProvider";
 
 type Props = {
     children: React.ReactNode;
@@ -19,9 +20,10 @@ export const AppProvider: FC<Props> = ({ children }) => {
             }
         >
             <Provider store={store}>
-                <AuthSuspense>
+                <AlertProvider>
                     {children}
-                </AuthSuspense>
+                </AlertProvider>
+
             </Provider>
         </Suspense>
     );

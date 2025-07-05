@@ -2,6 +2,8 @@ import Axios, { type InternalAxiosRequestConfig } from 'axios';
 
 import { env } from '@/config/env';
 import { paths } from '@/config/path';
+import { dispatch } from '@/store';
+import { addAlert, showAlert } from '@/store/slices/alert.slice';
 
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
     if (config.headers) {
@@ -23,8 +25,10 @@ api.interceptors.response.use(
     },
     (error) => {
         const message = error.response?.data?.message || error.message;
-        // TODO: Replace with a better error notification system
-        alert(message);
+        dispatch(showAlert({
+            message,
+            type: 'error'
+        }))
 
         if (error.response?.status === 401) {
             const searchParams = new URLSearchParams();
