@@ -100,6 +100,7 @@ export class LegacyDao {
             data: {
                 userId,
                 active: true,
+                umaMusumeId: legacyData.umaMusumeId,
                 blueSpark: legacyData.blueSpark ? {
                     create: {
                         type: legacyData.blueSpark.type,
@@ -133,6 +134,10 @@ export class LegacyDao {
 
         if (updateData.active !== undefined) {
             updateOperations.active = updateData.active;
+        }
+
+        if (updateData.umaMusumeId !== undefined) {
+            updateOperations.umaMusumeId = updateData.umaMusumeId;
         }
 
         // Update the legacy first

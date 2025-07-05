@@ -32,6 +32,12 @@ export class LegacyService {
     }
 
     async createLegacy(userId: string, legacyData: CreateLegacyRequest): Promise<LegacyResponse> {
+        if (!legacyData.umaMusumeId) {
+            const error = new Error('A Umamusume must be provided') as ApiError;
+            error.statusCode = 400;
+            throw error;
+        }
+
         if (!legacyData.blueSpark && !legacyData.pinkSpark) {
             const error = new Error('At least one spark (blue or pink) must be provided') as ApiError;
             error.statusCode = 400;

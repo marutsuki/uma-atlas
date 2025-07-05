@@ -13,6 +13,7 @@ export interface CreatePinkSparkRequest {
 }
 
 export interface CreateLegacyRequest {
+    umaMusumeId: string;
     blueSpark?: CreateBlueSparkRequest;
     pinkSpark?: CreatePinkSparkRequest;
 }
@@ -28,6 +29,7 @@ export interface UpdatePinkSparkRequest {
 }
 
 export interface UpdateLegacyRequest {
+    umaMusumeId?: string;
     active?: boolean;
     blueSpark?: UpdateBlueSparkRequest;
     pinkSpark?: UpdatePinkSparkRequest;
